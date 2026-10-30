@@ -34,3 +34,4 @@ This repo contains code of Mr. Panda's Portfolio for a Codrops article!! It's a 
 - Better loading screen.
 - Text box so the panda says some stuff.
 - Adjust curve for mobile devices.
+# halloween
