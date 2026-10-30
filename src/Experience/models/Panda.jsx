@@ -9,6 +9,11 @@ import {
   PANDA_SHIFT_X_AMOUNT,
   pandaCurve,
 } from "../components/curve";
+import { useCutout } from "../halloween/materials";
+
+// 🎃 witch hat, sits on Mr. Panda's head whenever he's in his regular outfit
+const HAT_HEIGHT = 0.62;
+const HAT_OFFSET = new THREE.Vector3(-0.07, 7.02, 0.04); // from the stick's base to the top of the head
 
 export default function Model({ scrollProgress, cameraScrollCurve, ...props }) {
   const { nodes, materials } = useGLTF("/models/Panda.glb");
@@ -18,6 +23,8 @@ export default function Model({ scrollProgress, cameraScrollCurve, ...props }) {
   const desert = useKTX2Texture("/textures/desert.ktx2");
   const zombie = useKTX2Texture("/textures/zombie.ktx2");
   const pandaRef = useRef();
+  const hatRef = useRef();
+  const hat = useCutout("witch_hat");
 
   const textureMap = useMemo(
     () => [
@@ -132,6 +139,12 @@ export default function Model({ scrollProgress, cameraScrollCurve, ...props }) {
         0.1
       );
 
+      if (hatRef.current) {
+        hatRef.current.visible = currentTextureRef.current === regular;
+        hatRef.current.position.copy(pandaRef.current.position).add(HAT_OFFSET);
+        hatRef.current.rotation.z = 0.18 + Math.sin(randomOffset.time * 2.2) * 0.05;
+      }
+
       pandaRef.current.rotation.x = Math.PI + randomOffset.rotation.x;
       pandaRef.current.rotation.y = 0 + randomOffset.rotation.y;
       pandaRef.current.rotation.z = Math.PI + randomOffset.rotation.z;
@@ -148,6 +161,9 @@ export default function Model({ scrollProgress, cameraScrollCurve, ...props }) {
         rotation={[Math.PI, 0, Math.PI]}
         scale={[1, 1, 1]}
       />
+      <mesh ref={hatRef} material={hat.material} scale={[HAT_HEIGHT * hat.aspect, HAT_HEIGHT, 1]}>
+        <planeGeometry args={[1, 1]} />
+      </mesh>
     </group>
   );
 }

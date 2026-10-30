@@ -8,6 +8,7 @@ import SceneThree from "./models/SceneThree";
 import SceneFour from "./models/SceneFour";
 import SingleSheet from "./models/SingleSheet";
 import Panda from "./models/Panda";
+import HalloweenWorld from "./halloween/HalloweenWorld";
 import {
   cameraCurve as initialCameraCurve,
   initialCameraPoints,
@@ -229,6 +230,7 @@ const Scene = ({
           <SceneTwo />
           <SceneThree scrollProgress={scrollProgress} />
           <SceneFour />
+          <HalloweenWorld />
         </group>
 
         <Panda

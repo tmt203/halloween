@@ -47,6 +47,7 @@ export default function Model(props) {
       <mesh
         geometry={nodes.Plane007.geometry}
         material={scene_2}
+        visible={false} // 🎃 sun replaced by the Halloween moon
         position={[5.418, 5.164, -2.296]}
         rotation={[Math.PI / 2, -0.064, 0]}
       />

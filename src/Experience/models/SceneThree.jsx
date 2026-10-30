@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useKTX2Texture } from "../utils/ktxLoader";
+import { useHalloweenText } from "../halloween/paperText";
 import { useFrame } from "@react-three/fiber";
 import { gsap } from "gsap";
 
@@ -27,6 +28,11 @@ export default function Model({ scrollProgress, ...props }) {
   const lerpFactor = 0.08;
 
   const scene_3 = useKTX2Texture("/textures/scene_3.ktx2");
+
+  // 🎃 Halloween copy (edit in halloween/texts.js)
+  const workSignText = useHalloweenText("workSign", nodes.Plane112.geometry);
+  const firstJobText = useHalloweenText("firstJob", nodes.Human_Resarcher.geometry);
+  const secondJobText = useHalloweenText("secondJob", nodes.Senior_Human_Researcher.geometry);
 
   useFrame(() => {
     if (pyramidDoorRef.current) {
@@ -106,14 +112,14 @@ export default function Model({ scrollProgress, ...props }) {
       />
       <mesh
         geometry={nodes.Plane112.geometry}
-        material={scene_3}
+        material={workSignText}
         position={[8.405, 4.947, -2.744]}
         rotation={[Math.PI / 2, 0.023, 0]}
       />
       <mesh
         ref={firstJobRef}
         geometry={nodes.Human_Resarcher.geometry}
-        material={scene_3}
+        material={firstJobText}
         position={[8.363, 3.436, firstJobOriginalZ]}
         rotation={[Math.PI / 2, 0.073, 0]}
         onPointerEnter={() => (firstJobHovered.current = true)}
@@ -122,7 +128,7 @@ export default function Model({ scrollProgress, ...props }) {
       <mesh
         ref={secondJobRef}
         geometry={nodes.Senior_Human_Researcher.geometry}
-        material={scene_3}
+        material={secondJobText}
         position={[10.062, 3.516, secondJobOriginalZ]}
         rotation={[Math.PI / 2, -0.127, 0]}
         onPointerEnter={() => (secondJobHovered.current = true)}

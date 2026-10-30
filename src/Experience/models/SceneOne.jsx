@@ -3,6 +3,7 @@ import { useGLTF, useKTX2 } from "@react-three/drei";
 import { useKTX2Texture } from "../utils/ktxLoader";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useHalloweenText } from "../halloween/paperText";
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene_1.glb");
@@ -55,6 +56,10 @@ export default function Model(props) {
   );
   const scene_1_bg = useKTX2Texture("/textures/scene_1_bg.ktx2");
   const scene_1 = useKTX2Texture("/textures/scene_1.ktx2");
+
+  // 🎃 Halloween copy (edit in halloween/texts.js)
+  const introText = useHalloweenText("intro", nodes.intro.geometry);
+  const aboutText = useHalloweenText("about", nodes.about.geometry);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
@@ -271,7 +276,7 @@ export default function Model(props) {
       <mesh
         ref={introRef}
         geometry={nodes.intro.geometry}
-        material={not_waterfall}
+        material={introText}
         position={[-17.941, 2.096, introOriginalZ]}
         rotation={[Math.PI / 2, 0.025, 0]}
         onPointerEnter={() => (introHovered.current = true)}
@@ -280,7 +285,7 @@ export default function Model(props) {
       <mesh
         ref={aboutRef}
         geometry={nodes.about.geometry}
-        material={not_waterfall}
+        material={aboutText}
         position={[-15.7, 1.987, aboutOriginalZ]}
         rotation={[Math.PI / 2, 0.025, 0]}
         onPointerEnter={() => (aboutHovered.current = true)}

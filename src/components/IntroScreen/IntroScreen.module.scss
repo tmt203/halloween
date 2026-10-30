@@ -1,12 +1,28 @@
+$night: rgb(30, 17, 54);
+$purple: rgb(74, 46, 120);
+$orange: rgb(242, 137, 43);
+$candy-yellow: rgb(255, 216, 74);
+$paper: rgb(255, 246, 220);
+
 .introScreen {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgb(247, 192, 83);
   height: 100vh;
   width: 100vw;
   z-index: 100;
-  color: rgb(126, 85, 2);
+  overflow: hidden;
+  color: $paper;
+  background:
+    radial-gradient(circle at 50% 42%, rgba($orange, 0.28) 0%, rgba($orange, 0) 38%),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(160, 140, 230, 0.12) 31px,
+      rgba(160, 140, 230, 0.12) 33px
+    ),
+    linear-gradient(180deg, $purple 0%, $night 100%);
 }
 
 .introScreenContent {
@@ -18,20 +34,127 @@
   align-items: center;
   text-align: center;
   line-height: 24px;
-  gap: 12px;
+  gap: 14px;
+  padding: 0 20px;
 }
 
+.pumpkin {
+  width: 120px;
+  filter: drop-shadow(0 0 28px rgba($orange, 0.75));
+  animation: pumpkinBob 2.4s ease-in-out infinite;
+}
+
+.title {
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: bold;
+  line-height: 1.2;
+  color: $orange;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.hints {
+  list-style: none;
+  font-size: 15px;
+  line-height: 26px;
+  opacity: 0.92;
+}
+
+// candy-corn loading bar
 .progressBarContainer {
-  width: 200px;
-  height: 8px;
-  background-color: rgba(126, 85, 2, 0.3);
-  border-radius: 4px;
+  margin-top: 6px;
+  width: 220px;
+  height: 12px;
+  background-color: rgba($paper, 0.15);
+  border: 2px solid rgba($paper, 0.6);
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .progressBar {
   height: 100%;
-  background-color: rgb(126, 85, 2);
+  border-radius: 6px;
   transition: width 0.3s ease-in;
-  border-radius: 4px;
+  background: repeating-linear-gradient(
+    -45deg,
+    $candy-yellow 0 8px,
+    $orange 8px 16px,
+    $paper 16px 24px
+  );
+}
+
+.links {
+  position: absolute;
+  left: 50%;
+  bottom: 9%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+
+  a {
+    color: $paper;
+  }
+}
+
+.bat {
+  position: absolute;
+  width: 70px;
+  opacity: 0.85;
+}
+
+.batOne {
+  top: 14%;
+  left: -60px;
+  animation: batFly 9s linear infinite;
+}
+
+.batTwo {
+  top: 26%;
+  left: -60px;
+  width: 48px;
+  animation: batFly 12s linear 3s infinite;
+}
+
+.batThree {
+  top: 8%;
+  left: -60px;
+  width: 38px;
+  animation: batFly 15s linear 6s infinite;
+}
+
+@keyframes pumpkinBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+
+@keyframes batFly {
+  0% {
+    transform: translate(0, 0) scaleY(1);
+  }
+  25% {
+    transform: translate(30vw, 30px) scaleY(0.8);
+  }
+  50% {
+    transform: translate(60vw, -10px) scaleY(1);
+  }
+  75% {
+    transform: translate(90vw, 25px) scaleY(0.8);
+  }
+  100% {
+    transform: translate(calc(100vw + 120px), 0) scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pumpkin,
+  .bat {
+    animation: none;
+  }
 }

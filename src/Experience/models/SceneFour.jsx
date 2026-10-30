@@ -1,11 +1,17 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useKTX2Texture } from "../utils/ktxLoader";
+import { useHalloweenText } from "../halloween/paperText";
 import { useFrame } from "@react-three/fiber";
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/models/scene_4.glb");
   const scene_4 = useKTX2Texture("/textures/scene_4.ktx2");
+
+  // 🎃 Halloween copy (edit in halloween/texts.js)
+  const featuredText = useHalloweenText("featured", nodes.Plane122.geometry);
+  const firstPaperText = useHalloweenText("firstPaper", nodes.Plane125.geometry);
+  const secondPaperText = useHalloweenText("secondPaper", nodes.Plane126.geometry);
 
   const ghostRef = useRef();
   const zombieHandRef = useRef();
@@ -72,7 +78,7 @@ export default function Model(props) {
       />
       <mesh
         geometry={nodes.Plane122.geometry}
-        material={scene_4}
+        material={featuredText}
         position={[15.905, 4.474, -2.751]}
         rotation={[1.566, -0.053, -0.004]}
       />
@@ -85,7 +91,7 @@ export default function Model(props) {
       <mesh
         ref={firstPaperRef}
         geometry={nodes.Plane125.geometry}
-        material={scene_4}
+        material={firstPaperText}
         position={[16.29, 3.282, firstPaperOriginalZ]}
         rotation={[Math.PI / 2, -0.007, 0]}
         onPointerEnter={() => (firstPaperHovered.current = true)}
@@ -94,7 +100,7 @@ export default function Model(props) {
       <mesh
         ref={secondPaperRef}
         geometry={nodes.Plane126.geometry}
-        material={scene_4}
+        material={secondPaperText}
         position={[17.918, 4.052, secondPaperOriginalZ]}
         rotation={[Math.PI / 2, -0.114, 0]}
         onPointerEnter={() => (secondPaperHovered.current = true)}

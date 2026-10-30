@@ -2,6 +2,7 @@ import { KTX2Loader } from "three/addons/loaders/KTX2Loader.js";
 import * as THREE from "three";
 import { useLoader, useThree } from "@react-three/fiber";
 import { useEffect, useMemo } from "react";
+import { NIGHT_TINT } from "../halloween/materials";
 
 export const useKTX2Texture = (
   textureUrl,
@@ -30,6 +31,7 @@ export const useKTX2Texture = (
       transparent,
       alphaTest: alphaTestValue,
       side: side === "front" ? THREE.FrontSide : THREE.DoubleSide,
+      color: NIGHT_TINT, // 🎃 Halloween night
     });
   }, [texture, transparent, alphaTestValue]);
 

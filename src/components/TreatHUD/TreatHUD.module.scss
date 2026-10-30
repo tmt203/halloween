@@ -1,0 +1,177 @@
+$ink: rgb(42, 36, 32);
+$paper: rgb(255, 246, 220);
+$orange: rgb(242, 137, 43);
+$purple: rgb(90, 58, 138);
+
+.counter {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 8px;
+  background: $paper;
+  color: $ink;
+  border: 3px solid $ink;
+  border-radius: 14px 10px 16px 9px;
+  box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.35);
+  font-weight: bold;
+  font-size: 18px;
+  transform: rotate(2deg);
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.2s ease, background 0.3s ease;
+
+  img {
+    width: 38px;
+  }
+}
+
+.bump {
+  transform: rotate(-3deg) scale(1.18);
+}
+
+.complete {
+  background: $orange;
+}
+
+.toast {
+  position: fixed;
+  top: 76px;
+  right: 22px;
+  z-index: 50;
+  padding: 6px 12px;
+  background: $purple;
+  color: $paper;
+  border: 2px solid $ink;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  pointer-events: none;
+  animation: toastIn 1.6s ease forwards;
+}
+
+.doneWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 10, 40, 0.45);
+  padding: 20px;
+}
+
+.done {
+  position: relative;
+  max-width: 380px;
+  padding: 34px 26px 22px;
+  background: $paper;
+  color: $ink;
+  border: 3px solid $ink;
+  border-radius: 18px 12px 20px 14px;
+  box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.4);
+  text-align: center;
+  transform: rotate(-1.5deg);
+  animation: popIn 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+
+  h2 {
+    color: $orange;
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    line-height: 1.5;
+    font-size: 15px;
+  }
+}
+
+.doneBat {
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  width: 120px;
+  transform: translateX(-50%);
+  animation: hover 2s ease-in-out infinite;
+}
+
+.buttons {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  button {
+    cursor: pointer;
+    padding: 8px 14px;
+    font-weight: bold;
+    font-size: 14px;
+    color: $paper;
+    background: $purple;
+    border: 2px solid $ink;
+    border-radius: 10px;
+  }
+
+  .secondary {
+    background: transparent;
+    color: $ink;
+  }
+}
+
+@keyframes toastIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  15%,
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: rotate(-1.5deg) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1.5deg) scale(1);
+  }
+}
+
+@keyframes hover {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -6px);
+  }
+}
+
+@media (max-width: 600px) {
+  .counter {
+    top: 12px;
+    right: 12px;
+    font-size: 16px;
+
+    img {
+      width: 30px;
+    }
+  }
+
+  .toast {
+    top: 64px;
+    right: 14px;
+  }
+}

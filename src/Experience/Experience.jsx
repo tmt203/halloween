@@ -4,6 +4,7 @@ import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import Scene from "./Scene";
 import * as THREE from "three/webgpu";
 import normalizeWheel from "normalize-wheel";
+import Flashlight from "./halloween/Flashlight";
 
 const Experience = () => {
   const camera = useRef();
@@ -80,7 +81,10 @@ const Experience = () => {
       if (!isSwiping.current || e.pointerType === "touch") return;
       const mouseMultiplier = 0.2;
       targetScrollProgress.current +=
-        Math.sign(e.movementY) * scrollSpeed * mouseMultiplier;
+        Math.sign(e.movementY) *
+        baseScrollSpeed *
+        mouseMultiplier *
+        scrollSpeedMultiplier.current;
     };
 
     const handleMouseUp = () => {
@@ -89,6 +93,7 @@ const Experience = () => {
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mousemove", handleMouseDrag);
     window.addEventListener("mouseup", handleMouseUp);
     window.addEventListener("touchstart", handleTouchStart, { passive: false });
@@ -135,7 +140,9 @@ const Experience = () => {
           makeDefault
           fov={35}
           // position={[0, 0, 30]}
-        />
+        >
+          <Flashlight />
+        </PerspectiveCamera>
         {/* <OrbitControls enableZoom={false} enableRotate={false} /> */}
       </group>
     </Canvas>

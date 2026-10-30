@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -21,7 +21,7 @@ const IntroScreen = () => {
         opacity: 0,
         duration: 1,
         ease: "power2.out",
-        delay: 1.5,
+        delay: 2.2,
       });
     }
   }, [progress]);
@@ -31,10 +31,20 @@ const IntroScreen = () => {
   return (
     <>
       <div ref={introRef} className={styles.introScreen}>
+        <img className={`${styles.bat} ${styles.batOne}`} src="/halloween/bat_full.webp" alt="" />
+        <img className={`${styles.bat} ${styles.batTwo}`} src="/halloween/bat_full.webp" alt="" />
+        <img className={`${styles.bat} ${styles.batThree}`} src="/halloween/bat_full.webp" alt="" />
+
         <div className={styles.introScreenContent}>
-          <div>
-            <br /> 🐼 scroll/drag up/down to navigate!! 😊
-          </div>
+          <img className={styles.pumpkin} src="/halloween/pumpkin_classic.webp" alt="" />
+
+          <h1 className={styles.title}>Mr. Panda&apos;s Haunted Notebook</h1>
+
+          <ul className={styles.hints}>
+            <li>🐼 scroll/drag up/down to navigate!!</li>
+            <li>🔦 move your mouse (or tap) to shine the flashlight</li>
+            <li>🍬 find all 13 hidden treats!</li>
+          </ul>
 
           <div className={styles.progressBarContainer}>
             <div
@@ -44,40 +54,24 @@ const IntroScreen = () => {
           </div>
         </div>
 
-        <a
-          href="https://www.youtube.com/watch?v=zyWD2E8AHCg"
-          className="tutorial-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            position: "absolute",
-            left: "50%",
-            bottom: "25%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "14px",
-            color: "#000000ff",
-            // textDecoration: "none",
-          }}
-        >
-          Watch tutorial here!!
-        </a>
-        <a
-          href="https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio"
-          className="credits-link"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            position: "absolute",
-            left: "50%",
-            bottom: "15%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "14px",
-            color: "#000000ff",
-            // textDecoration: "none",
-          }}
-        >
-          See full list of credits here!!
-        </a>
+        <div className={styles.links}>
+          <a
+            href="https://www.youtube.com/watch?v=zyWD2E8AHCg"
+            className="tutorial-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Watch tutorial here!!
+          </a>
+          <a
+            href="https://github.com/andrewwoan/mr-pandas-psychologically-safe-portfolio"
+            className="credits-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            See full list of credits here!!
+          </a>
+        </div>
       </div>
     </>
   );
